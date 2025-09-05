@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MovieMysteries
+
+A web application that reveals fascinating secrets and behind-the-scenes facts about your favorite movies using AI-powered content generation.
+
+## Features
+
+- **Google Authentication** - Secure sign-in with your Google account
+- **Movie Selection** - Choose your favorite movie for personalized content
+- **AI-Generated Facts** - Fresh, interesting movie trivia on every visit
+- **Responsive Design** - Beautiful, dark-themed interface with mystical aesthetics
+- **User Profiles** - Display your Google profile information
+
+## Tech Stack
+
+- **Frontend**: Next.js 14, React, TypeScript, Tailwind CSS
+- **Authentication**: NextAuth.js with Google Provider
+- **Database**: PostgreSQL with Prisma ORM
+- **AI**: OpenAI GPT-4o-mini for content generation
+- **Deployment**: Optimized for Vercel
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+ 
+- PostgreSQL database
+- Google OAuth credentials
+- OpenAI API key
+
+### Environment Variables
+
+Create a `.env.local` file with:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Database
+DATABASE_URL="postgresql://username:password@localhost:5432/moviemysteries"
+
+# NextAuth
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="your-secret-key"
+
+# Google OAuth
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+
+# OpenAI
+OPENAI_API_KEY="your-openai-api-key"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Install dependencies:
+```bash
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Set up the database:
+```bash
+npx prisma migrate dev
+```
 
-## Learn More
+3. Start the development server:
+```bash
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. Open [http://localhost:3000] in your browser
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+├── app/                    # Next.js app router
+│   ├── (public)/          # Public routes (sign-in)
+│   ├── api/               # API routes
+│   ├── onboarding/        # First-time user setup
+│   └── page.tsx           # Main dashboard
+├── components/            # React components
+├── lib/                   # Utility functions
+├── prisma/               # Database schema and migrations
+└── public/               # Static assets
+```
 
-## Deploy on Vercel
+## How It Works
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Users sign in with their Google account
+2. First-time users select their favorite movie
+3. The app generates unique movie facts using OpenAI's API
+4. Each page refresh shows a new fascinating fact about the chosen movie
+5. Users can change their movie selection anytime
