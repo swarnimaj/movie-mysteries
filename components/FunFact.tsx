@@ -11,8 +11,14 @@ export function FunFact({ movie }: { movie: string }) {
     setLoading(true);
     try {
       const res = await fetch(`/api/fun-fact?movie=${encodeURIComponent(movie)}`);
+      if (!res.ok) {
+        throw new Error(`API error: ${res.status}`);
+      }
       const data = await res.json();
-      setFact(data.fact ?? "");
+      setFact(data.fact ?? "The mystery vault is temporarily sealed. Please try again!");
+    } catch (error) {
+      console.error("Failed to load fun fact:", error);
+      setFact("The mystery vault is temporarily sealed. Please try unveiling another secret!");
     } finally {
       setLoading(false);
     }

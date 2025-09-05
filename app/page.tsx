@@ -38,7 +38,7 @@ export default async function Home() {
         </div>
 
         <div className="mystery-card p-6 float-animation">
-          <div className="flex items-center gap-6">
+          <div className="flex flex-col sm:flex-row items-center gap-6">
             <div className="relative">
               {user?.image && (
                 <div className="relative">
@@ -55,7 +55,7 @@ export default async function Home() {
                 </div>
               )}
             </div>
-            <div className="flex-1">
+            <div className="flex-1 text-center sm:text-left">
               <div className="text-2xl font-bold text-white glow-text">{user?.name ?? "Mystery Agent"}</div>
               <div className="text-cyan-300 text-sm">{user?.email}</div>
               <div className="text-purple-300 text-sm mt-1">
@@ -65,7 +65,7 @@ export default async function Home() {
                 </span>
               </div>
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="w-full sm:w-auto">
               <LogoutButton />
             </div>
           </div>
